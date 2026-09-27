@@ -1,0 +1,598 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anand Raju | Personal Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background: linear-gradient(135deg, #071952, #088395, #35A29F);
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(2px);
+            animation: floating 7s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .bubble1 {
+            width: 250px;
+            height: 250px;
+            background: #ffdd59;
+            top: 5%;
+            left: 3%;
+        }
+
+        .bubble2 {
+            width: 200px;
+            height: 200px;
+            background: #ff6bcb;
+            right: 3%;
+            bottom: 5%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-35px);
+            }
+        }
+
+        /* Main */
+        .main {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio {
+            width: 100%;
+            max-width: 950px;
+            padding: 45px;
+            text-align: center;
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+
+            animation: cardAppear 1.2s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile picture */
+        .profile-circle {
+            width: 220px;
+            height: 220px;
+            padding: 7px;
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                45deg,
+                #ffdd00,
+                #ff6b6b,
+                #a855f7,
+                #00f5d4,
+                #ffdd00
+            );
+
+            background-size: 400% 400%;
+
+            animation:
+                gradientBorder 5s ease infinite,
+                profileFloat 4s ease-in-out infinite;
+
+            box-shadow:
+                0 0 20px #00f5d4,
+                0 0 45px rgba(255,221,0,0.7);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid #071952;
+        }
+
+        @keyframes gradientBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes profileFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* Name */
+        .name {
+            margin-top: 25px;
+            font-size: 3.2rem;
+            font-weight: 800;
+
+            background: linear-gradient(
+                90deg,
+                #ffe259,
+                #ffa751,
+                white,
+                #00f5d4
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 2px white);
+            }
+
+            to {
+                filter: drop-shadow(0 0 14px #00f5d4);
+            }
+        }
+
+        .profession {
+            color: #dffff8;
+            margin-top: 10px;
+        }
+
+        .intro {
+            max-width: 750px;
+            margin: 20px auto 30px;
+            line-height: 1.8;
+            color: #f5ffff;
+        }
+
+        /* Button */
+        .view-btn {
+            border: none;
+            border-radius: 50px;
+            padding: 15px 32px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            color: #071952;
+
+            background: linear-gradient(
+                90deg,
+                #ffe259,
+                #ffa751
+            );
+
+            box-shadow: 0 8px 25px rgba(255,174,80,0.45);
+
+            transition: 0.3s;
+        }
+
+        .view-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 35px rgba(255,221,0,0.7);
+        }
+
+        /* Profile Details */
+        #profileDetails {
+            display: none;
+            margin-top: 40px;
+            animation: detailsAppear 0.8s ease;
+        }
+
+        @keyframes detailsAppear {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+            color: #ffe259;
+            font-weight: bold;
+        }
+
+        .info-card {
+            height: 100%;
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        }
+
+        .info-card i {
+            font-size: 38px;
+            color: #ffe259;
+            margin-bottom: 12px;
+        }
+
+        .info-card h5 {
+            color: #ffe259;
+            font-weight: bold;
+        }
+
+        .info-card p {
+            margin: 5px 0;
+        }
+
+        /* Family section */
+        .family-title {
+            color: #00f5d4;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Message */
+        .message {
+            margin-top: 35px;
+            padding: 22px;
+
+            background: rgba(0,0,0,0.18);
+
+            border-left: 5px solid #ffe259;
+            border-radius: 12px;
+
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #d9fff8;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            .portfolio {
+                padding: 30px 18px;
+            }
+
+            .profile-circle {
+                width: 175px;
+                height: 175px;
+            }
+
+            .name {
+                font-size: 2.3rem;
+            }
+
+            .intro {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Animation -->
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+
+    <main class="main">
+
+        <div class="portfolio">
+
+            <!-- Profile Image -->
+            <div class="profile-circle">
+                <img src="nanna 1(1).jpeg"
+                     alt="Anand Raju Profile Picture">
+            </div>
+
+            <!-- Introduction -->
+            <h1 class="name">Anand Raju</h1>
+
+            <h4 class="profession">
+                <i class="bi bi-person-workspace"></i>
+                Dedicated Contractor & Printer
+            </h4>
+
+            <p class="intro">
+                Welcome to my personal profile. I am
+                <strong>Anand Raju</strong>, a hardworking and responsible
+                professional from Kakileru, Iragaram. I believe that
+                dedication, honesty and continuous hard work are the keys
+                to a successful life.
+            </p>
+
+            <!-- Last Click Option -->
+            <button class="view-btn"
+                    id="viewButton"
+                    onclick="showProfile()">
+
+                <i class="bi bi-person-vcard-fill"></i>
+                Click Here to See My Full Profile
+
+            </button>
+
+
+            <!-- Hidden Profile -->
+            <section id="profileDetails">
+
+                <h2 class="section-title">
+                    <i class="bi bi-person-lines-fill"></i>
+                    My Personal Details
+                </h2>
+
+                <div class="row g-4">
+
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <i class="bi bi-person-fill"></i>
+                            <h5>Name</h5>
+                            <p>Anand Raju</p>
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <i class="bi bi-calendar-heart-fill"></i>
+                            <h5>Age</h5>
+                            <p>43 Years</p>
+                        </div>
+                    </div>
+
+                    <!-- Native Place -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <h5>Native Place</h5>
+                            <p>Kakileru, Iragaram</p>
+                        </div>
+                    </div>
+
+                    <!-- Current Work -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <i class="bi bi-printer-fill"></i>
+                            <h5>Current Work</h5>
+                            <p>Printer</p>
+                        </div>
+                    </div>
+
+                    <!-- Workplace -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <i class="bi bi-building-fill"></i>
+                            <h5>Work Place</h5>
+                            <p>West Godavari District</p>
+                        </div>
+                    </div>
+
+                    <!-- Profession -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <i class="bi bi-briefcase-fill"></i>
+                            <h5>Profession</h5>
+                            <p>Contractor</p>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="col-md-12">
+                        <div class="info-card">
+                            <i class="bi bi-mortarboard-fill"></i>
+                            <h5>Education</h5>
+                            <p>1st to 10th Class</p>
+                            <p>Kakileru</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Family -->
+                <h3 class="family-title">
+                    <i class="bi bi-people-fill"></i>
+                    My Family
+                </h3>
+
+                <div class="row g-4">
+
+                    <!-- Child 1 -->
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <i class="bi bi-person-heart"></i>
+                            <h5>Child</h5>
+                            <p>Denna</p>
+                        </div>
+                    </div>
+
+                    <!-- Child 2 -->
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <i class="bi bi-person-heart"></i>
+                            <h5>Child</h5>
+                            <p>Sharan</p>
+                        </div>
+                    </div>
+
+                    <!-- Wife -->
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <i class="bi bi-heart-fill"></i>
+                            <h5>Wife</h5>
+                            <p>Prema Kumari</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Personal Message -->
+                <div class="message">
+
+                    <i class="bi bi-quote"></i>
+
+                    My journey is built on hard work, responsibility and
+                    dedication. I always believe in doing honest work,
+                    supporting my family and moving forward with confidence.
+
+                </div>
+
+
+                <!-- Hide Button -->
+                <button class="btn btn-outline-light rounded-pill px-4 mt-4"
+                        onclick="hideProfile()">
+
+                    <i class="bi bi-arrow-up-circle"></i>
+                    Hide Profile
+
+                </button>
+
+            </section>
+
+
+            <footer>
+                © 2026 Anand Raju | My Personal Portfolio
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        function showProfile() {
+
+            const details =
+                document.getElementById("profileDetails");
+
+            const button =
+                document.getElementById("viewButton");
+
+            details.style.display = "block";
+
+            button.innerHTML =
+                '<i class="bi bi-check-circle-fill"></i> Profile Opened';
+
+            button.disabled = true;
+
+            setTimeout(function () {
+
+                details.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }, 200);
+        }
+
+
+        function hideProfile() {
+
+            const details =
+                document.getElementById("profileDetails");
+
+            const button =
+                document.getElementById("viewButton");
+
+            details.style.display = "none";
+
+            button.innerHTML =
+                '<i class="bi bi-person-vcard-fill"></i> Click Here to See My Full Profile';
+
+            button.disabled = false;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+    </script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+</body>
+</html>
+```
